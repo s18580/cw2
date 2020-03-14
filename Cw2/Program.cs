@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 
@@ -65,8 +66,14 @@ namespace Cw2
                         }
                     }
 
-                    //sprawdzenie czy sie powtarza osoba
-                    //dodanie do HashSet
+                    var newStud = new Student(tabs);
+
+                    var hash = new HashSet<Student>(new MyComparer());
+                    if (!hash.Add(newStud)) //sprawdzenie czy sie powtarza osoba, jesli nie dodanie do HashSet
+                    {
+                        File.AppendAllText(plikerror, "Student o tych danych juz istnieje - " + line); //logujemy powtorzone informacje o studencie do pliku log.txt
+                    }
+                  
                 }
 
             }
