@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Text.RegularExpressions;
 
 namespace Cw2
@@ -10,7 +11,8 @@ namespace Cw2
             // domyslne ustawienie zmiennych
             String plikwe = "data.csv",
                    plikwy = "zesult.xml",
-                   format = "xml";
+                   format = "xml",
+                   plikerror = "log.txt";
 
             if (args.Length<3) // sprwadzenie czy zostały podane wszystie argumenty
             {
@@ -43,7 +45,33 @@ namespace Cw2
             }
 
 
+// Otwarcie pliku wejsciowego i przegladanie zawartosci
+            var lines = File.ReadLines(plikwe);
+            foreach (var line in lines)
+            {
+                var tabs = line.Split(",");
+                if (tabs.Length != 9)
+                {
+                    File.AppendAllText(plikerror, "Niepoprawne informacje o studencie - "+line); //logujemy bledne informacje o studencie do pliku log.txt
+                }
+                else
+                {
+                    //sprawdzenie czy jest jakas pusta kolumna
+                    for (int i = 0; i < tabs.Length; i++)
+                    {
+                        if (tabs[i]=="")
+                        {
+                            File.AppendAllText(plikerror, "Niepełne informacje o studencie - " + line); //logujemy niepelne informacje o studencie do pliku log.txt
+                        }
+                    }
+                   
 
+
+                    //sprawdzenie czy sie powtarza osoba
+                    //dodanie do HashSet
+                }
+
+            }
 
 
 
