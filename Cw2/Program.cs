@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Xml.Serialization;
 
 namespace Cw2
 {
@@ -10,6 +11,7 @@ namespace Cw2
         public static void Main(string[] args)
         {
             // domyslne ustawienie zmiennych
+            var hash = new HashSet<Student>(new MyComparer());
             String plikwe = "data.csv",
                    plikwy = "zesult.xml",
                    format = "xml",
@@ -68,7 +70,6 @@ namespace Cw2
 
                     var newStud = new Student(tabs);
 
-                    var hash = new HashSet<Student>(new MyComparer());
                     if (!hash.Add(newStud)) //sprawdzenie czy sie powtarza osoba, jesli nie dodanie do HashSet
                     {
                         File.AppendAllText(plikerror, "Student o tych danych juz istnieje - " + line); //logujemy powtorzone informacje o studencie do pliku log.txt
@@ -79,11 +80,18 @@ namespace Cw2
             }
 
 
-
-
-
-
-
+            switch (format)
+            {
+                case "xml":
+                    {
+                        FileStream writer = new FileStream(plikwy, FileMode.Create);
+                        XmlSerializer serializer = new XmlSerializer(typeof(List<Student>), new XmlRootAttribute("uczelnia"));
+                        serializer.Serialize(writer, hash);
+                        writer.Close();
+                    }
+                    break;
+            }
+            
 
         }
     }

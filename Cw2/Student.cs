@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Cw2
 {
+    [Serializable()]
     class Student
     {
         public String Imie, Nazwisko, Kierunek, Tryb, Index, Mail, ImieMatki, ImieOjca;
