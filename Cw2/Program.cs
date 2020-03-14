@@ -12,7 +12,7 @@ namespace Cw2
         {
             // domyslne ustawienie zmiennych
             var hash = new HashSet<Student>(new MyComparer());
-            String plikwe = "data.csv",
+            string plikwe = "data.csv",
                    plikwy = "zesult.xml",
                    format = "xml",
                    plikerror = "log.txt";
@@ -85,7 +85,7 @@ namespace Cw2
                 case "xml":
                     {
                         FileStream writer = new FileStream(plikwy, FileMode.Create);
-                        XmlSerializer serializer = new XmlSerializer(typeof(List<Student>), new XmlRootAttribute("uczelnia"));
+                        XmlSerializer serializer = new XmlSerializer(typeof(HashSet<Student>), new XmlRootAttribute("uczelnia"));
                         serializer.Serialize(writer, hash);
                         writer.Close();
                     }

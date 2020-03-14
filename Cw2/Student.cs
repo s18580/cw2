@@ -1,16 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace Cw2
 {
     [Serializable()]
     class Student
     {
-        public String Imie, Nazwisko, Kierunek, Tryb, Index, Mail, ImieMatki, ImieOjca;
+        //[XmlElement(ElementName = "InneNazwa")]
+        public string Imie;
+        //[XmlAttribute(AttributeName = "InnaNazwa")]
+        public string Nazwisko;
+        public string Kierunek, Tryb, Index, Mail, ImieMatki, ImieOjca;
+
         public DateTime Data;
 
-        public Student(String[] tab)
+        public Student(string[] tab)
         {
             Imie = tab[0];
             Nazwisko = tab[1];
