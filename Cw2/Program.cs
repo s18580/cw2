@@ -64,8 +64,6 @@ namespace Cw2
                             File.AppendAllText(plikerror, "Niepełne informacje o studencie - " + line); //logujemy niepelne informacje o studencie do pliku log.txt
                         }
                     }
-                   
-
 
                     //sprawdzenie czy sie powtarza osoba
                     //dodanie do HashSet
